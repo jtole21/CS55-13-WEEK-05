@@ -1,0 +1,23 @@
+[
+  {
+    "id": "switching-the-blog-to-json",
+    "title": "Switching This Blog to a JSON Data File",
+    "date": "2026-09-18",
+    "topic": "Data",
+    "contentHtml": "<p>This week I stopped storing blog posts as Markdown files. Every post now lives in <code>nextjs-blog/data/posts.json</code>, and <code>nextjs-blog/lib/posts-json.js</code> reads that file when Next.js builds the site.</p><p>Each record has an id, title, date, and HTML body, plus a topic so the homepage can group what I am writing about. JSON is a comfortable fit for a small blog because the shape of a post is obvious and there is no extra parser to configure.</p><p>The homepage lists these records, and each title opens a page generated from the same file.</p>"
+  },
+  {
+    "id": "pages-router-api-routes",
+    "title": "Adding an API Route with the Pages Router",
+    "date": "2026-09-21",
+    "topic": "API Routes",
+    "contentHtml": "<p>An API route is a serverless function that lives beside the pages. I added <code>pages/api/hello.js</code>, and Next.js exposes it at <code>/api/hello</code>.</p><p>The function receives a request and a response. It answers with JSON: a status of 200 and a short hello message. That same pattern is how a Pages Router app can offer a small backend without a separate server.</p><p>The lesson also points out that pages should import shared data helpers directly during static generation, instead of calling their own API routes while the site is building.</p>"
+  },
+  {
+    "id": "deploying-this-blog-to-vercel",
+    "title": "Deploying This Blog to Vercel",
+    "date": "2026-09-23",
+    "topic": "Deployment",
+    "contentHtml": "<p>After the pages read from the JSON file, the next step is to put the app on the public web. The project is pushed to GitHub, then imported into Vercel, which detects Next.js and runs the production build.</p><p>Vercel runs <code>getStaticProps</code> and <code>getStaticPaths</code> at build time, so the three posts are rendered into static pages. The API route becomes a serverless function on the same deployment.</p><p>Once the build finishes, the homepage, each post, and <code>/api/hello</code> are available from the Vercel URL.</p>"
+  }
+]
